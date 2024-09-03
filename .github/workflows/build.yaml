@@ -10,7 +10,9 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout code
         uses: actions/checkout@master
@@ -33,9 +35,6 @@ jobs:
 
       - name: Build and push multi-architecture image
         uses: docker/build-push-action@master
-        permissions:
-          contents: read
-          packages: write
         with:
           context: .
           platforms: linux/amd64,linux/arm64
