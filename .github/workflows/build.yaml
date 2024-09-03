@@ -33,6 +33,9 @@ jobs:
 
       - name: Build and push multi-architecture image
         uses: docker/build-push-action@master
+        permissions:
+          contents: read
+          packages: write
         with:
           context: .
           platforms: linux/amd64,linux/arm64
@@ -40,10 +43,3 @@ jobs:
           tags: |
             expl0it99/marzban_metrics_exporter:latest
             ghcr.io/${{ github.repository }}/marzban_metrics_exporter:latest
-
-      - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@master
-        with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
-          subject-digest: ${{ steps.push.outputs.digest }}
-          push-to-registry: true
