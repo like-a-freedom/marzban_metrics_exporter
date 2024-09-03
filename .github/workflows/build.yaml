@@ -31,6 +31,13 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push multi-architecture image
-        run: |
-          docker buildx create --use
-          docker buildx build --platform linux/amd64,linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/marzban_metrics_exporter:latest --push .
+        uses: docker/build-push-action@master
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/marzban_metrics_exporter:latest
+            ${{ secrets.DOCKER_USERNAME }}/marzban_metrics_exporter:${{ github.ref_name }}
+            ghcr.io/${{ github.repository_owner }}/marzban_metrics_exporter:latest
+            ghcr.io/${{ github.repository_owner }}/marzban_metrics_exporter:${{ github.ref_name }}
