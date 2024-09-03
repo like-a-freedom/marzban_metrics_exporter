@@ -1,1 +1,1 @@
-Another one Marzaban exporter for Prometheus
+Another one [Marzban](https://github.com/Gozargah/Marzban) exporter for Prometheus
