@@ -37,5 +37,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            expl0it99/marzban_metrics_exporter:latest
-            expl0it99/marzban_metrics_exporter:${{ github.ref_name }}
+            ${{ secrets.DOCKER_USERNAME }}/marzban_metrics_exporter:latest
