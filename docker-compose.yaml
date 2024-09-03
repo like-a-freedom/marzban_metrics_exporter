@@ -1,0 +1,17 @@
+services:
+  marzban_metrics_exporter:
+    build: .
+    image: marzban_metrics_exporter
+    container_name: marzban_metrics_exporter
+    ports:
+      - 8500:8000
+    restart: unless-stopped
+    environment:
+      - MARZBAN_URL=http://ip:port
+      - MARZBAN_USERNAME=admin
+      - MARZBAN_PASSWORD=admin
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 1GB
